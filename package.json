@@ -1,0 +1,21 @@
+{
+  "name": "ractive-json-editor",
+  "version": "0.0.1",
+  "description": "Edit bits of your Ractive data in a JSON tree-ish thing",
+  "author": "Chris Reeves",
+  "license": "MIT",
+  "devDependencies": {
+    "gobble": "^0",
+    "gobble-cli": "^0",
+    "gobble-buble": "^0",
+    "gobble-rollup": "^0",
+    "request-promise": "^3",
+    "gobble-buble-html": "^0",
+    "gobble-stylus": "^1",
+    "gobble-stylus-html": "^0"
+  },
+  "scripts": {
+    "watch": "gobble -p 3006",
+    "build": "gobble build -f build"
+  }
+}

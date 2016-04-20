@@ -1,0 +1,71 @@
+{{#partial value}}{{>~/getType(.)}}{{/partial}}
+
+{{#partial object}}
+<div class="obj{{#if ~/toggles[@keypath]}} open{{/if}}"><span on-click="toggle('toggles.' + ~/escapeKey(@keypath))">&#x007b;{{#if !~/toggles[@keypath]}}<span class="ellipsis">&hellip;</span>{{/if}}</span>{{#if ~/toggles[@keypath]}}
+  {{#each .:k,i}}
+  <div class="entry">
+    <span class="key" on-click="set('keys.' + ~/escapeKey(@keypath), k)">
+      <span>{{#if typeof ~/keys[@keypath] === 'string'}}<textarea rows="{{#if k.indexOf('\n') !== -1 || ~/keys[@keypath].indexOf('\n') !== -1}}5{{else}}1{{/if}}">{{~/keys[@keypath]}}</textarea>{{else}}<pre>{{k}}</pre>{{/if}}</span>{{#if typeof ~/keys[@keypath] === 'string'}}<button title="apply" class="icon ok" on-click="renameKey(@keypath, ~/keys[@keypath])">&#10003;</button><button title="cancel" class="icon cancel" on-click="stopEdit(@keypath, 'keys')">&#10005;</button><button title="remove key" style-margin-left="1em" class="icon cancel" on-click="removeKey(@keypath)">&#8722;</button>{{/if}}</span><div class="value">{{>value}}</div>
+  </div>
+  {{/each}}
+  {{/if}}<span class="close">&#x007d;</span>{{#if ~/toggles[@keypath]}}
+  <button title="more actions" class="icon" on-click="toggle('extras.' + ~/escapeKey(@keypath))">&#8943;</button>
+  {{#if ~/extras[@keypath]}}
+    <input value="{{~/values[@keypath].name}}" /><button title="add key" class="icon ok" on-click="addKey(@keypath)">+</button>
+  {{/if}}
+{{/if}}
+</div>
+{{/partial}}
+
+{{#partial array}}
+<div class="array{{#if ~/toggles[@keypath]}} open{{/if}}"><span on-click="toggle('toggles.' + ~/escapeKey(@keypath))">[{{#if !~/toggles[@keypath]}}<span class="ellipsis">&hellip;</span>{{/if}}</span>{{#if ~/toggles[@keypath]}}
+  {{#each .:i}}
+  <div class="entry"><span class="idx">{{i}}</span><div class="value">{{>value}}</div></div>
+  {{/each}}
+  {{/if}}<span class="close">]</span>{{#if ~/toggles[@keypath]}}
+  <button title="more actions" class="icon" on-click="toggle('extras.' + ~/escapeKey(@keypath))">&#8943;</button>
+  {{#if ~/extras[@keypath]}}
+    <button title="push" class="icon" on-click="push(@keypath, '')">&#707;+</button>
+    <button title="unshift" class="icon" on-click="unshift(@keypath, '')">+&#706;</button>
+    <button title="pop" class="icon" on-click="pop(@keypath)">&#707;-</button>
+    <button title="shift" class="icon" on-click="shift(@keypath)">-&#706;</button>
+  {{/if}}
+{{/if}}
+</div>
+{{/partial}}
+
+{{#partial string}}
+<span class="str" on-click="startEdit(@keypath)"><span class="str">{{#if ~/editable && ~/edits[@keypath]}}<textarea rows="{{#if ..indexOf('\n') !== -1}}5{{else}}1{{/if}}">{{.}}</textarea>{{else}}<pre>{{.}}</pre>{{/if}}</span><span class="close" />{{#if ~/editable && ~/edits[@keypath]}}{{>editorEnd}}{{/if}}</span>
+{{/partial}}
+
+{{#partial number}}
+<span class="num" on-click="startEdit(@keypath)">{{#if ~/editable && ~/edits[@keypath]}}<input type="number" value="{{.}}" />{{else}}{{.}}{{/if}}</span><span class="close" />{{#if ~/editable && ~/edits[@keypath]}}{{>editorEnd}}{{/if}}
+{{/partial}}
+
+{{#partial boolean}}
+<span class="bool" on-click="startEdit(@keypath)">{{#if ~/editable && ~/edits[@keypath]}}<input type="checkbox" checked="{{.}}" />{{else}}{{.}}{{/if}}</span><span class="close" />{{#if ~/editable && ~/edits[@keypath]}}{{>editorEnd}}{{/if}}
+{{/partial}}
+
+{{#partial null}}
+<span class="null" on-click="startEdit(@keypath)">null</span><span class="close" />{{#if ~/editable && ~/edits[@keypath]}}{{>editorEnd}}{{/if}}
+{{/partial}}
+
+{{#partial function}}
+<span class="fn" on-click="startEdit(@keypath)">function() {...}</span><span class="close" />
+{{/partial}}
+
+{{#partial wat}}
+<span class="wat" on-click="startEdit(@keypath)">???</span><span class="close" />{{#if ~/editable && ~/edits[@keypath]}}{{>editorEnd}}{{/if}}
+{{/partial}}
+
+{{#partial editorEnd}}<button title="close editor" class="ok icon" on-click="stopEdit(@keypath)">&#10003;
+</button><select on-change="changeType(@keypath)" twoway="false" value="{{~/getType(.)}}">
+  <option>string</option>
+  <option>number</option>
+  <option>boolean</option>
+  <option>object</option>
+  <option>array</option>
+  <option>null</option>
+</select>{{/partial}}
+
+<div class="root">{{#with root}}{{>value}}{{else}}undefined{{/with}}</div>

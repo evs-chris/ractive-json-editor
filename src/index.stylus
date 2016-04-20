@@ -1,0 +1,135 @@
+// TODO: this is just, well, I'm sorry
+.root
+  font-family monospace
+  line-height 1.6em
+  span, pre
+    display inline-block
+    cursor pointer
+    margin 0
+  button.icon
+    border 1px solid rgba(#999, 0.25)
+    background #fdfdfd
+    border-radius 0.2em
+    font-size 0.8em
+    margin 0 0.25em
+    padding 1px 0.2em 0 0.2em
+    color #999
+    cursor pointer
+    outline none
+    transition-property color, border
+    transition-duration 0.3s
+    transition-timing-function ease-in-out
+    vertical-align top
+    &:hover
+      color darken(blue, 25%)
+      border 1px solid rgba(darken(blue, 25%), 0.5)
+    &.ok:hover
+      color darken(green, 25%)
+      border 1px solid rgba(darken(green, 25%), 0.5)
+    &.cancel:hover
+      color darken(red, 25%)
+      border 1px solid rgba(darken(red, 25%), 0.5)
+  textarea
+    font-size 1.025em
+    border 1px solid rgba(#999, 0.3)
+    border-radius 0.2em
+  select
+    border 1px solid rgba(#999, 0.3)
+    background #fdfdfd
+    padding 1px 0.2em 0 0.2em
+    border-radius 1em
+    vertical-align top
+    font-size 0.7em
+    outline none
+  input
+    font-size 0.7em
+    border 1px solid rgba(#999, 0.3)
+    border-radius 0.2em
+  .obj, .array
+    display inline
+    &:hover > .entry
+      border-left 1px dashed rgba(black, 0.15)
+    .entry
+      transition border-left 0.3s ease-in-out
+      border-left 1px dashed transparent
+      margin-left 0.75em
+      padding-left 0.25em
+      .close:after
+        content ','
+        color darken(gray, 25%)
+        font-weight 600
+      &:last-of-type .close:after
+        content ''
+      .value
+        display inline
+      .key
+        color green
+        pre
+          user-select none
+          -webkit-user-select none
+          -moz-user-select none
+        > *
+          vertical-align top
+        &:after
+          content ':'
+        > span
+          > *
+            vertical-align top
+          &:before, &:after
+            content '"'
+      .idx
+        color darken(blue, 10%)
+        &:after
+          content ':'
+      .key, .idx
+        vertical-align top
+        &:after
+          margin-right 0.5em
+    > span
+      font-weight 600
+      color darken(gray, 25%)
+    .ellipsis
+      color lighten(gray, 25%)
+  > .obj
+    padding 0.5em
+    margin 0.2em
+    border 1px solid rgba(#999, 0.3)
+    background-color #fefefe
+    display: inline-block;
+    border-radius 0.2em
+    &.open
+      display block
+  .num
+    color darken(blue, 10%)
+    font-weight 500
+  .bool
+    color darken(orange, 20%)
+    font-weight 500
+  .wat
+    color darken(red, 10%)
+    font-weight 500
+  .null
+    color darken(gray, 10%)
+    font-weight 500
+  .fn
+    color darken(green, 30%)
+  .str
+    color lighten(rebeccapurple, 10%)
+    pre
+      transition border-left 0.3s ease-in-out
+      border-left 1px dashed transparent
+      padding-left 0.1em
+      &:hover
+        border-left 1px dashed rgba(black, 0.15);
+    span.close
+      vertical-align bottom
+    > span.str
+      vertical-align top
+      &:before, &:after
+        content '"'
+        display inline-block
+        color darken(purple, 40%)
+      &:before
+        vertical-align top
+      &:after
+        vertical-align bottom
