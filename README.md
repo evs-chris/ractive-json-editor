@@ -1,6 +1,6 @@
 # ractive-json-editor
 
-A JSON tree-ish editor for any old data. Check out the [demo](https://evschris.github.io/ractive-json-editor).
+A JSON tree-ish editor for any old data. Check out the [demo](https://evs-chris.github.io/ractive-json-editor).
 
 ## Getting it
 
