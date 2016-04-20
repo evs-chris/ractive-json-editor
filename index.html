@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>JSON Editor</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="charset" content="utf8" />
+    <script src="/lib/ractive.js"></script>
+    <script src="/ractive-json-editor.js"></script>
+    <script type="text/html" id="template">
+      <JsonEditor root="{{obj}}" editable="true" />
+      <code><pre>{{JSON.stringify(obj, null, '\t')}}</pre></code>
+    </script>
+    <style>body {
+  font-family: sans-serif;
+}
+h2 {
+  text-align: center;
+}
+</style>
+  </head>
+  <body>
+    <h2>Ractive JSON Editor</h2>
+    <div id="main"></div>
+    <script>
+      Ractive.components.JsonEditor = JsonEditor;
+      window.r = new Ractive({
+        el: '#main',
+        template: '#template',
+        data: {
+          obj: {
+            foo: 'bar',
+            baz: 123,
+            wat: false,
+            who: undefined,
+            why: null,
+            when: { foo: "yep", baz: { wat: { biz:"yep" } } },
+            how: [ 1, false, "12", { test: 42, foo: 'again', bar: null } ],
+            oof: function() { console.log('???'); }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
